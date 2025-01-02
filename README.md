@@ -55,9 +55,34 @@ cd Job-Hive
 git checkout -b <your_branch_name>
 ```
 
-**5.** Make changes.
+**5.** Install Dependencies.
 
-**6.** Stage your changes and commit
+```bash
+cd client
+npm install
+
+cd server
+npm install
+npm install nodemon
+```
+
+**6.** Run the Application.
+    
+For client:
+```bash
+cd client
+npm run dev
+```
+
+For server: 
+```bash
+cd server
+npm run dev
+```
+
+**7.** Make changes.
+
+**8.** Stage your changes and commit
 
 ```bash
 git add -A
@@ -65,15 +90,15 @@ git add -A
 git commit -m "<your_commit_message>"
 ```
 
-**7.** Push your local commits to the remote repo.
+**9.** Push your local commits to the remote repo.
 
 ```bash
 git push -u origin <your_branch_name>
 ```
 
-**8.** Create a [PR](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request) to `develop` !
+**10.** Create a [PR](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request) to `develop` !
 
-**9.** **Congratulations!** :tada: Sit and relax, you've made your contribution :v: :heart: 💥
+**11.** **Congratulations!** :tada: Sit and relax, you've made your contribution :v: :heart: 💥
 
 <br><br>
 
