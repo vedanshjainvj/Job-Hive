@@ -11,6 +11,9 @@ import {
 import { HiArrowRight } from "react-icons/hi";
 
 const Footer = () => {
+
+  const currentYear = new Date().getFullYear(); // Dynamic Year
+
   return (
     <footer className="bg-white text-gray-800">
       {/* Line Above Footer */}
@@ -116,7 +119,7 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="border-t border-gray-300 pt-6 mt-6 text-center">
           <p className="text-gray-600 text-sm">
-            © 2024 Job Hunt. All rights reserved.
+            &copy; {currentYear} Job Hive. All rights reserved.
           </p>
         </div>
       </div>
