@@ -103,12 +103,12 @@ const Signup = () => {
   return (
     <div>
       <Navbar />
-      <div className="flex items-center justify-center max-w-7xl mx-auto">
+      <div className="flex items-center justify-center mx-auto max-w-7xl">
         <form
           onSubmit={(e) => submitHandler(e)}
-          className="w-1/2 border border-gray-200 rounded-md p-4 my-10"
+          className="w-1/2 p-4 my-10 border border-gray-200 rounded-md"
         >
-          <h1 className="font-bold text-xl mb-5">Sign Up</h1>
+          <h1 className="mb-5 text-xl font-bold">Sign Up</h1>
           <div className="my-2">
             <Label>Full Name</Label>
             <Input
@@ -140,7 +140,7 @@ const Signup = () => {
               placeholder="1234567890"
             />
           </div>
-          <div className="my-2 relative">
+          <div className="relative my-2 display: none">
             <Label>Password</Label>
             <Input
               type={showPassword ? "text" : "password"}
@@ -150,13 +150,13 @@ const Signup = () => {
               placeholder="Enter password here"
             />
             <div
-              className="absolute right-2 top-9 cursor-pointer"
+              className="absolute cursor-pointer right-2 top-9"
               onClick={togglePasswordVisibility}
             >
               {showPassword ? (
-                <EyeOff className="h-5 w-5" />
+                <EyeOff className="w-5 h-5" />
               ) : (
-                <Eye className="h-5 w-5" />
+                <Eye className="w-5 h-5" />
               )}
             </div>
           </div>
@@ -198,7 +198,7 @@ const Signup = () => {
           {loading ? (
             <Button className="w-full my-4">
               {" "}
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait{" "}
+              <Loader2 className="w-4 h-4 mr-2 animate-spin" /> Please wait{" "}
             </Button>
           ) : (
             <>

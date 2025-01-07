@@ -1,5 +1,5 @@
-// let BASE_URL = 'http://localhost:8000/api/v1';
-let BASE_URL = import.meta.env.VITE_BASE_URL;
+let BASE_URL = 'http://localhost:3000/api/v1';
+// let BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const USER_API_END_POINT = `${BASE_URL}/user`;
 export const JOB_API_END_POINT = `${BASE_URL}/job`;
