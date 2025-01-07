@@ -7,6 +7,7 @@ import Footer from './shared/Footer'
 import useGetAllJobs from '@/hooks/useGetAllJobs'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import KnowMoreButton from './ui/know-more'
 
 const Home = () => {
   useGetAllJobs();
@@ -23,6 +24,7 @@ const Home = () => {
       <HeroSection />
       <CategoryCarousel />
       <LatestJobs />
+      <KnowMoreButton/>
       <Footer />
     </div>
   )
