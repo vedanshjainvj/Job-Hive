@@ -43,7 +43,7 @@ const Browse = () => {
           {filteredJobs.length > 0 ? (
             filteredJobs.map((job) => <Job key={job._id} job={job} />)
           ) : (
-            <p>No jobs found for the search query.</p>
+            <p className='text-gray-700'>No jobs found for the search query.</p>
           )}
         </div>
       </div>

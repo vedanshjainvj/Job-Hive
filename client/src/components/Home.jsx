@@ -20,12 +20,16 @@ const Home = () => {
   }, [user, navigate]);
 
   return (
-    <div className="mx-8 md:mx-20">
+    <div>
       <Navbar />
-      <HeroSection />
-      <CategoryCarousel />
-      <LatestJobs />
-      <Footer />
+      <div className="mx-8  md:mx-20">
+        <div className="mt-32">
+          <HeroSection />
+          <CategoryCarousel />
+          <LatestJobs />
+        </div>
+        <Footer />
+      </div>
     </div>
   );
 };

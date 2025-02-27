@@ -94,7 +94,7 @@ export default function Roadmaps() {
           <input
             type="text"
             placeholder="Search roadmaps..."
-            className="w-full max-w-md mx-auto block px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full max-w-md mx-auto block px-4 py-2 border border-gray-300 rounded-md shadow-sm  hover:scale-105"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -109,13 +109,13 @@ export default function Roadmaps() {
             >
               <div className="h-full p-6 bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-200 flex flex-col justify-between">
                 <div>
-                  <div className={`${roadmap.color} w-12 h-12 rounded-lg flex items-center justify-center text-white mb-4`}>
+                  <div className={`${roadmap.color} w-12 h-12 rounded-lg flex items-center justify-center text-white mb-4 transition-transform duration-200 ease-in-out transform -rotate-15 hover:rotate-0`}>
                     {roadmap.icon}
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                  <h3 className="text-xl font-bold font-sans text-gray-900 mb-2">
                     {roadmap.title}
                   </h3>
-                  <p className="text-gray-600 mb-4">
+                  <p className="text-gray-400 mb-4">
                     {roadmap.description}
                   </p>
                 </div>
@@ -123,7 +123,7 @@ export default function Roadmaps() {
                   {roadmap.topics.map((topic, index) => (
                     <span 
                       key={index}
-                      className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800"
+                      className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 transition duration-200 ease-in-out transform hover:scale-105 hover:bg-gray-200"
                     >
                       {topic}
                     </span>
