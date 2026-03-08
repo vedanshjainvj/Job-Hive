@@ -1,0 +1,256 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Super Admin Dashboard{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.css">
+<style>
+  .dashboard-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 10px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  }
+  .stats-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  .chart-container {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-4">
+  <div class="row">
+    <div class="col-12">
+      <div class="dashboard-card">
+        <h1 class="display-4">Super Admin Dashboard</h1>
+        <p class="lead">Monitor and manage all system activities</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="row">
+    <div class="col-md-3">
+      <div class="stats-card">
+        <h3 class="text-primary">{{ total_companies }}</h3>
+        <p class="text-muted">Total Companies</p>
+        <i class="fas fa-building fa-2x text-primary"></i>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="stats-card">
+        <h3 class="text-success">{{ total_recruiters }}</h3>
+        <p class="text-muted">Total Recruiters</p>
+        <i class="fas fa-users-cog fa-2x text-success"></i>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="stats-card">
+        <h3 class="text-info">{{ total_candidates }}</h3>
+        <p class="text-muted">Total Candidates</p>
+        <i class="fas fa-user-graduate fa-2x text-info"></i>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="stats-card">
+        <h3 class="text-warning">{{ total_jobs }}</h3>
+        <p class="text-muted">Total Jobs</p>
+        <i class="fas fa-briefcase fa-2x text-warning"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts Row -->
+  <div class="row">
+    <div class="col-md-6">
+      <div class="chart-container">
+        <h4>User Registration Trends</h4>
+        <canvas id="registrationChart"></canvas>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="chart-container">
+        <h4>User Type Distribution</h4>
+        <canvas id="userTypeChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="chart-container">
+        <h4>Job Applications Over Time</h4>
+        <canvas id="applicationsChart"></canvas>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="chart-container">
+        <h4>Company Activity</h4>
+        <canvas id="companyChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Data Tables -->
+  <div class="row mt-4">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>Recent Activities</h5>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Company Name</th>
+                  <th>Recruiters</th>
+                  <th>Active Jobs</th>
+                  <th>Total Applications</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for company in companies %}
+                <tr>
+                  <td>{{ company.name }}</td>
+                  <td>{{ company.recruiters_count }}</td>
+                  <td>{{ company.active_jobs }}</td>
+                  <td>{{ company.total_applications }}</td>
+                  <td><span class="badge bg-success">Active</span></td>
+                </tr>
+                {% empty %}
+                <tr>
+                  <td colspan="5" class="text-center">No companies found</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // User Registration Trends Chart
+  const regCtx = document.getElementById('registrationChart').getContext('2d');
+  const registrationChart = new Chart(regCtx, {
+    type: 'line',
+    data: {
+      labels: {{ registration_labels|safe }},
+      datasets: [{
+        label: 'New Registrations',
+        data: {{ registration_data|safe }},
+        borderColor: 'rgb(75, 192, 192)',
+        backgroundColor: 'rgba(75, 192, 192, 0.1)',
+        tension: 0.1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        }
+      }
+    }
+  });
+
+  // User Type Distribution Chart
+  const userCtx = document.getElementById('userTypeChart').getContext('2d');
+  const userTypeChart = new Chart(userCtx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Candidates', 'Recruiters', 'Companies'],
+      datasets: [{
+        data: [{{ total_candidates }}, {{ total_recruiters }}, {{ total_companies }}],
+        backgroundColor: [
+          'rgba(54, 162, 235, 0.8)',
+          'rgba(255, 99, 132, 0.8)',
+          'rgba(255, 205, 86, 0.8)'
+        ]
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'bottom',
+        }
+      }
+    }
+  });
+
+  // Job Applications Chart
+  const appCtx = document.getElementById('applicationsChart').getContext('2d');
+  const applicationsChart = new Chart(appCtx, {
+    type: 'bar',
+    data: {
+      labels: {{ application_labels|safe }},
+      datasets: [{
+        label: 'Applications',
+        data: {{ application_data|safe }},
+        backgroundColor: 'rgba(153, 102, 255, 0.6)',
+        borderColor: 'rgba(153, 102, 255, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+  // Company Activity Chart
+  const compCtx = document.getElementById('companyChart').getContext('2d');
+  const companyChart = new Chart(compCtx, {
+    type: 'radar',
+    data: {
+      labels: ['Active Jobs', 'Total Applications', 'Hired Candidates', 'Recruiters', 'Reviews'],
+      datasets: [{
+        label: 'Company Metrics',
+        data: [85, 90, 70, 65, 80],
+        fill: true,
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgb(255, 99, 132)',
+        pointBackgroundColor: 'rgb(255, 99, 132)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgb(255, 99, 132)'
+      }]
+    },
+    options: {
+      responsive: true,
+      elements: {
+        line: {
+          borderWidth: 3
+        }
+      }
+    }
+  });
+</script>
+{% endblock %}
