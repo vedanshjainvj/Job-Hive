@@ -55,7 +55,11 @@ const Navbar = () => {
                 <div className='flex items-center gap-1 sm:gap-4'>
                     <ul className='hidden md:flex font-medium items-center gap-5'>
                         {
-                            user && user.role === 'recruiter' ? (
+                            user && user.role === 'superadmin' ? (
+                                <>
+                                    <li><Link to="/superadmin/dashboard">Dashboard</Link></li>
+                                </>
+                            ) : user && user.role === 'recruiter' ? (
                                 <>
                                     <li><Link to="/admin/companies">Companies</Link></li>
                                     <li><Link to="/admin/jobs">Jobs</Link></li>
@@ -81,7 +85,11 @@ const Navbar = () => {
                     {menuOpened && (
                         <ul className='flex flex-col items-start fixed top-16 right-8 p-12 bg-white font-medium shadow-md w-64 transition-all duration-300 rounded-3xl gap-5'>
                             {
-                                user && user.role === 'recruiter' ? (
+                                user && user.role === 'superadmin' ? (
+                                <>
+                                    <li><Link to="/superadmin/dashboard">Dashboard</Link></li>
+                                </>
+                            ) : user && user.role === 'recruiter' ? (
                                     <>
                                         <li><Link to="/admin/companies">Companies</Link></li>
                                         <li><Link to="/admin/jobs">Jobs</Link></li>

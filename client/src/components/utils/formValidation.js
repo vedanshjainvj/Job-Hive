@@ -5,14 +5,14 @@ const signupInfoSchema=z.object({
     email:z.string().nonempty({message:"email is required!"}).email({message:"Invalid email!"}),
     phoneNumber:z.string().nonempty({message:'phone number is required'}).length(10,{message:'phone number must be to 10 digits long'}).regex(/^[0-9]+$/,{message:"Invalid phone number!"}),
     password:z.string().nonempty({message:'password is required'}).min(6,{message:"password must be atleast 6 characters long"}),
-    role:z.enum(['student','recruiter'],{message:'select valid option'})
+    role:z.enum(['student','recruiter','superadmin'],{message:'select valid option'})
 })
 
 
 const loginInfoSchema=z.object({
     email:z.string().nonempty({message:'email is required'}).email({message:"Invalid email address"}),
     password:z.string().nonempty({message:'password is required'}).min(6,{message:"password must be 6 characters long"}),
-    role:z.enum(['student','recruiter'],{message:'select valid option'})
+    role:z.enum(['student','recruiter','superadmin'],{message:'select valid option'})
 })
 
 const jobInfoSchema=z.object({

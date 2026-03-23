@@ -1,7 +1,4 @@
-
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-
-// import AdminDashboard from './components/Admins/AdminDashboard' this is creating an error
 
 import { messaging } from './components/utils/firebase'
 import { getToken } from 'firebase/messaging'
@@ -25,6 +22,8 @@ const PostJob = lazy(() => import('./components/admin/PostJob'))
 const Applicants = lazy(() => import('./components/admin/Applicants'))
 const ProtectedRoute = lazy(() => import('./components/admin/ProtectedRoute'))
 const Roadmaps = lazy(() => import('./components/Roadmaps'))
+const SuperAdminDashboard = lazy(() => import('./components/superadmin/SuperAdminDashboard'))
+const SuperAdminProtectedRoute = lazy(() => import('./components/superadmin/SuperAdminProtectedRoute'))
 
 const appRouter = createBrowserRouter([
   {
@@ -65,18 +64,8 @@ const appRouter = createBrowserRouter([
     element: <Roadmaps />
   },
   {
-    // path:"/admin",
-    // element: <AdminDashboard/>
-  },
-  {
     path:"/admin/companies",
     element: <ProtectedRoute><Companies/></ProtectedRoute>
-
-  },
-  // Admin routes
-  {
-    path: "/admin/companies",
-    element: <ProtectedRoute><Companies /></ProtectedRoute>
   },
   {
     path: "/admin/companies/create",
@@ -97,6 +86,11 @@ const appRouter = createBrowserRouter([
   {
     path: "/admin/jobs/:id/applicants",
     element: <ProtectedRoute><Applicants /></ProtectedRoute> 
+  },
+  // Super Admin routes
+  {
+    path: "/superadmin/dashboard",
+    element: <SuperAdminProtectedRoute><SuperAdminDashboard /></SuperAdminProtectedRoute>
   },
 ]);
 

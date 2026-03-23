@@ -139,6 +139,17 @@ const Login = () => {
                                 />
                                 <Label htmlFor="r2">Recruiter</Label>
                             </div>
+                            <div className="flex items-center space-x-2">
+                                <Input
+                                    type="radio"
+                                    name="role"
+                                    value="superadmin"
+                                    checked={input.role === 'superadmin'}
+                                    onChange={changeEventHandler}
+                                    className="cursor-pointer"
+                                />
+                                <Label htmlFor="r3">Super Admin</Label>
+                            </div>
                         </RadioGroup>
                     </div>
                     {

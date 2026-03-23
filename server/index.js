@@ -8,6 +8,7 @@ import userRoute from "./routes/user.routes.js";
 import companyRoute from "./routes/company.routes.js";
 import jobRoute from "./routes/job.routes.js";
 import applicationRoute from "./routes/application.route.js";
+import superadminRoute from "./routes/superadmin.routes.js";
 import { errorMiddleware } from "./middlewares/error.js";
 
 dotenv.config({});
@@ -74,6 +75,7 @@ app.use("/api/v1/user", userRoute);
 app.use("/api/v1/company", companyRoute);
 app.use("/api/v1/job", jobRoute);
 app.use("/api/v1/application", applicationRoute);
+app.use("/api/v1/superadmin", superadminRoute);
 
 app.listen(PORT,()=>{
     connectDB();
